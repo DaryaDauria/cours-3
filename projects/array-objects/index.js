@@ -42,8 +42,11 @@ function map(array, fn) {
    reduce([1, 2, 3], (all, current) => all + current) // 6
  */
 function reduce(array, fn, initial) {
-  let result = initial;
-  for (let i = 0; i < array.length; i++) {
+  const hasInitial = typeof initial !== 'undefined';
+
+  let result = hasInitial ? initial : array[0];
+
+  for (let i = hasInitial ? 0 : 1; i < array.length; i++) {
     result = fn(result, array[i], i, array);
   }
   return result;
@@ -59,9 +62,8 @@ function reduce(array, fn, initial) {
  */
 function upperProps(obj) {
   const newArr = [];
-  for (let key in obj) {
-    key = key.toUpperCase();
-    newArr.push(key);
+  for (const key in obj) {
+    newArr.push(key.toUpperCase());
   }
   return newArr;
 }
