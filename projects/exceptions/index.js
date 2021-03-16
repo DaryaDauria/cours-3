@@ -129,8 +129,8 @@ function calculator(number = 0) {
         if (currentValue === 0) {
           throw new Error('division by 0');
         }
-        return accumulator / currentValue, number;
-      }),
+        return accumulator / currentValue;
+      }, number),
 
     mul: (...arr) =>
       arr.reduce((accumulator, currentValue) => accumulator * currentValue, number),
