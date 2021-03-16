@@ -17,18 +17,21 @@
    isAllTrue([100, 2, 3, 4, 5], n => n < 10) // вернет false
  */
 function isAllTrue(array, fn) {
+  if (typeof fn !== 'function') {
+    throw new Error('fn is not a function');
+  }
+
   if (!Array.isArray(array) || !array.length) {
     throw new Error('empty array');
   }
-  if (typeof fn !== 'function') {
-    throw new Error('is not a function');
+
+  for (const el of array) {
+    if (!fn(el)) {
+      return false;
+    }
   }
 
-  if (array.every(fn)) {
-    return true;
-  }
-
-  return false;
+  return true;
 }
 
 /*
@@ -73,21 +76,23 @@ function isSomeTrue(array, fn) {
  3.3: Необходимо выбрасывать исключение в случаях:
    - fn не является функцией (с текстом "fn is not a function")
  */
+
 function returnBadArguments(fn, ...args) {
-  const array = [];
   if (typeof fn !== 'function') {
-    throw new Error('is not a function');
+    throw new Error('fn is not a function');
   }
-  for (let i = 1; i < arguments.length; i++) {
+
+  const bad = [];
+
+  for (const arg of args) {
     try {
-      if (fn(arguments[i])) {
-        throw new Error();
-      }
-    } catch (e) {
-      array.push(arguments[i]);
+      fn(arg);
+    } catch {
+      bad.push(arg);
     }
   }
-  return array;
+
+  return bad;
 }
 
 /*
@@ -111,35 +116,24 @@ function calculator(number = 0) {
   if (typeof number !== 'number') {
     throw new Error('number is not a number');
   }
-  return {
-    sum: function () {
-      for (let i = 0; i < arguments.length; i++) {
-        number += arguments[i];
-      }
-      return number;
-    },
-    dif: function () {
-      for (let i = 0; i < arguments.length; i++) {
-        number -= arguments[i];
-      }
-      return number;
-    },
 
-    div: function () {
-      for (let i = 0; i < arguments.length; i++) {
-        if (arguments[i] === 0) {
+  return {
+    sum: (...arr) =>
+      arr.reduce((accumulator, currentValue) => accumulator + currentValue, number),
+
+    dif: (...arr) =>
+      arr.reduce((accumulator, currentValue) => accumulator - currentValue, number),
+
+    div: (...arr) =>
+      arr.reduce((accumulator, currentValue) => {
+        if (currentValue === 0) {
           throw new Error('division by 0');
         }
-        number /= arguments[i];
-      }
-      return number;
-    },
-    mull: function () {
-      for (let i = 0; i < arguments.length; i++) {
-        number *= arguments[i];
-      }
-      return number;
-    },
+        return accumulator / currentValue, number;
+      }),
+
+    mul: (...arr) =>
+      arr.reduce((accumulator, currentValue) => accumulator * currentValue, number),
   };
 }
 
