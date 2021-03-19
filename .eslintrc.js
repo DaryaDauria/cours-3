@@ -5,6 +5,7 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 2019,
     sourceType: 'module',
+    allowImportExportEverywhere: true,
   },
   plugins: ['prettier', 'jest'],
   extends: ['eslint:recommended', 'plugin:prettier/recommended'],

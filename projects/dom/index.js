@@ -1,5 +1,7 @@
 /* ДЗ 4 - работа с DOM */
 
+import { node } from 'webpack';
+
 /*
  Задание 1:
 
@@ -11,11 +13,10 @@
    createDivWithText('loftschool') // создаст элемент div, поместит в него 'loftschool' и вернет созданный элемент
  */
 function createDivWithText(text) {
-  const elem = document.createElement('div');
-  elem.textContent = 'loftSchool';
-  return elem;
+  const div = document.querySelector('div');
+  div.textContent = text;
+  return div;
 }
-
 /*
  Задание 2:
 
@@ -77,7 +78,7 @@ function findAllPSiblings(where) {
 function findError(where) {
   const result = [];
 
-  for (const child of where.childNodes) {
+  for (const child of where.children) {
     result.push(child.textContent);
   }
 
@@ -96,7 +97,12 @@ function findError(where) {
    После выполнения функции, дерево <div></div>привет<p></p>loftchool!!!
    должно быть преобразовано в <div></div><p></p>
  */
-function deleteTextNodes(where) {}
+function deleteTextNodes(where) {
+  for (const node of where.childNodes) {
+    node.textContent = '';
+  }
+  return node;
+}
 
 /*
  Задание 6:
