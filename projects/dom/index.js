@@ -1,7 +1,5 @@
 /* ДЗ 4 - работа с DOM */
 
-import { node } from 'webpack';
-
 /*
  Задание 1:
 
@@ -98,10 +96,13 @@ function findError(where) {
    должно быть преобразовано в <div></div><p></p>
  */
 function deleteTextNodes(where) {
-  for (const node of where.childNodes) {
-    node.textContent = '';
+  for (let i = 0; i < where.childNodes.length; i++) {
+    const elem = where.childNodes[i];
+    if (elem.nodeType === 3) {
+      where.removeChild(elem);
+      i--;
+    }
   }
-  return node;
 }
 
 /*
@@ -115,7 +116,18 @@ function deleteTextNodes(where) {
    После выполнения функции, дерево <span> <div> <b>привет</b> </div> <p>loftchool</p> !!!</span>
    должно быть преобразовано в <span><div><b></b></div><p></p></span>
  */
-function deleteTextNodesRecursive(where) {}
+function deleteTextNodesRecursive(where) {
+  const nodes = [...where.childNodes];
+
+  for (const elem of nodes) {
+    if (elem.nodeType === 3) {
+      where.removeChild(elem);
+    } else {
+      deleteTextNodesRecursive(elem);
+    }
+  }
+  return where;
+}
 
 /*
  Задание 7 *:
