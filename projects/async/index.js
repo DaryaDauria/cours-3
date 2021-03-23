@@ -30,8 +30,8 @@
  */
 
 import './towns.html';
-
-const homeworkContainer = document.querySelector('#app');
+import { loadAndSortTowns } from './functions.js';
+// const homeworkContainer = document.querySelector('#app');
 
 /*
  Функция должна вернуть Promise, который должен быть разрешен с массивом городов в качестве значения
@@ -39,7 +39,9 @@ const homeworkContainer = document.querySelector('#app');
  Массив городов пожно получить отправив асинхронный запрос по адресу
  https://raw.githubusercontent.com/smelukov/citiesTest/master/cities.json
  */
-function loadTowns() {}
+function loadTowns() {
+  return loadAndSortTowns();
+}
 
 /*
  Функция должна проверять встречается ли подстрока chunk в строке full
@@ -54,21 +56,21 @@ function loadTowns() {}
  */
 function isMatching(full, chunk) {}
 
-/* Блок с надписью "Загрузка" */
-const loadingBlock = homeworkContainer.querySelector('#loading-block');
-/* Блок с надписью "Не удалось загрузить города" и кнопкой "Повторить" */
-const loadingFailedBlock = homeworkContainer.querySelector('#loading-failed');
-/* Кнопка "Повторить" */
-const retryButton = homeworkContainer.querySelector('#retry-button');
-/* Блок с текстовым полем и результатом поиска */
-const filterBlock = homeworkContainer.querySelector('#filter-block');
-/* Текстовое поле для поиска по городам */
-const filterInput = homeworkContainer.querySelector('#filter-input');
-/* Блок с результатами поиска */
-const filterResult = homeworkContainer.querySelector('#filter-result');
+// /* Блок с надписью "Загрузка" */
+// const loadingBlock = homeworkContainer.querySelector('#loading-block');
+// /* Блок с надписью "Не удалось загрузить города" и кнопкой "Повторить" */
+// const loadingFailedBlock = homeworkContainer.querySelector('#loading-failed');
+// /* Кнопка "Повторить" */
+// const retryButton = homeworkContainer.querySelector('#retry-button');
+// /* Блок с текстовым полем и результатом поиска */
+// const filterBlock = homeworkContainer.querySelector('#filter-block');
+// /* Текстовое поле для поиска по городам */
+// const filterInput = homeworkContainer.querySelector('#filter-input');
+// /* Блок с результатами поиска */
+// const filterResult = homeworkContainer.querySelector('#filter-result');
 
-retryButton.addEventListener('click', () => {});
+// retryButton.addEventListener('click', () => {});
 
-filterInput.addEventListener('input', function () {});
+// filterInput.addEventListener('input', function () {});
 
 export { loadTowns, isMatching };
